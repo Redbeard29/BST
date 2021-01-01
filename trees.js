@@ -61,16 +61,65 @@ class BinarySearchTree{
         }
         return current;
     }
+    //Implementing BFS and DFS with variations
+    BFS(){
+        var data = [];
+        var queue = [];
+        var node = this.root;
+        queue.push(node);
+
+        while(queue.length){
+            node = queue.shift();
+            data.push(node.val);
+            if(node.left){
+                queue.push(node.left);
+            }
+            if(node.right){
+                queue.push(node.right);
+            }
+        }
+        return data;
+    }
+    DFSPreOrder(){
+        var visited = [];
+        var current = this.root;
+        function traverse(node){
+            visited.push(node.val);
+            if(node.left) traverse(node.left);
+            if(node.right) traverse(node.right);
+        }
+        traverse(current);
+        return visited;
+    }
+    DFSPostOrder(){
+        var visited = [];
+        var current = this.root;
+        function traverse(node){
+            if(node.left) traverse(node.left);
+            if(node.right) traverse(node.right);
+            visited.push(node.val);
+        }
+        traverse(current);
+        return visited;
+    }
+    DFSInOrder(){
+        var visited = [];
+        var current = this.root;
+        function traverse(node){
+            if(node.left) traverse(node.left);
+            visited.push(node.val);
+            if(node.right) traverse(node.right);
+        }
+        traverse(current);
+        return visited;
+    }
 }
 
 var tree = new BinarySearchTree();
 
 tree.insert(10);
-tree.insert(5);
-tree.insert(2);
-tree.insert(13);
-tree.insert(11);
-tree.insert(16);
-tree.insert(7);
-
-console.log(tree.find(18));
+tree.insert(15);
+tree.insert(6);
+tree.insert(3);
+tree.insert(8);
+tree.insert(20);
